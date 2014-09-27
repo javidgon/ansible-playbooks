@@ -1,0 +1,11 @@
+- name: Update the APT local repositories and upgrade all the packages afterwards
+  hosts: cluster
+  sudo: true 
+  remote_user: nero
+  tasks:
+
+   - name: Updates the APT repositories 
+     apt: update_cache=yes
+
+   - name: Upgrade all the packages 
+     apt: upgrade=full

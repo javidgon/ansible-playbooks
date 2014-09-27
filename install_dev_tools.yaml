@@ -1,0 +1,19 @@
+- name: Install the customized development environment in all the machines
+  hosts: cluster
+  remote_user: nero
+  sudo: yes
+  tasks:
+
+   - name: Be sure that Git is installed 
+     apt: name=git state=installed 
+     sudo_user: nero
+
+   - name: Clone .dotfiles repository
+     git: repo=https://github.com/javidgon/.dotfiles.git
+          dest=/home/nero/.dotfiles
+          update=yes
+     sudo: no
+
+   - name: Install vim 
+     shell: ./bootstrap.sh vim > bootstrap.log chdir=/home/nero/.dotfiles/
+     sudo: no
